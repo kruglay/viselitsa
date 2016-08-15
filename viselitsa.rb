@@ -5,9 +5,9 @@
 
 current_path = "./" + File.dirname(__FILE__)
 
-require current_path + "/game.rb"
-require current_path + "/result_printer.rb"
-require current_path + "/word_reader.rb"
+require current_path + "/lib/game.rb"
+require current_path + "/lib/result_printer.rb"
+require current_path + "/lib/word_reader.rb"
 
 puts "Игра виселица. Версия 3. C чтением данных из файлов. (c) 2014 Mike Butlitsky\n\n"
 
