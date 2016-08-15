@@ -27,7 +27,6 @@ class Game
       slovo = slovo.encode("UTF-8")
     end
 
-    # Перед тем, как разбивать слово на буквы, переведем его в верхний регистр
     return Unicode.upcase(slovo).split('')
   end
 
@@ -36,8 +35,6 @@ class Game
   end
 
   def next_step(bukva)
-    # Переводим букву в верхний регистр для единообразия
-    # Теперь не важно, в каком регистре пользователь вводи буквы
     bukva = Unicode.upcase(bukva)
 
     if @status == -1 || @status == 1
@@ -48,13 +45,34 @@ class Game
       return
     end
 
-    if @letters.include? bukva
+    if (
+      @letters.include?(bukva) ||
+      (bukva == "Е" && @letters.include?("Ё")) ||
+      (bukva == "Ё" && @letters.include?("Е")) ||
+      (bukva == "И" && @letters.include?("Й")) ||
+      (bukva == "Й" && @letters.include?("И"))
+    )
       @good_letters << bukva
 
-      if @good_letters.uniq.sort == @letters.uniq.sort
-        @status = 1 # статус - победа
+      if bukva == "И"
+        @good_letters << "Й"
       end
 
+      if bukva == "Й"
+        @good_letters << "И"
+      end
+
+      if bukva == "Е"
+        @good_letters << "Ё"
+      end
+
+      if bukva == "Ё"
+        @good_letters << "Е"
+      end
+
+      if (@letters - @good_letters).empty?
+        @status = 1
+      end
     else
       @bad_letters << bukva
 
