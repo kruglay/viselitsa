@@ -20,7 +20,7 @@ words_file_name = current_path + "/data/words.txt"
 word = word_reader.read_from_file(words_file_name)
 game = Game.new(word)
 
-while game.status == 0 do
+while game.in_progress? do
   printer.print_status(game)
   game.ask_next_letter
 end

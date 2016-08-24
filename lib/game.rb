@@ -19,7 +19,7 @@ class Game
     @good_letters = []
     @bad_letters = []
 
-    @status = 0
+    @status = :in_progress
   end
 
   def get_letters(slovo)
@@ -63,6 +63,10 @@ class Game
     @errors >= MAX_ERRORS
   end
 
+  def in_progress?
+    @status == :in_progress
+  end
+
   def repeated?(letter)
     @good_letters.include?(letter) || @bad_letters.include?(letter)
   end
@@ -70,18 +74,19 @@ class Game
   def next_step(letter)
     letter = Unicode.upcase(letter)
 
-    return if @status == -1 || @status == 1
+    return if @status == :won || @status == :lost
     return if repeated?(letter)
 
     if is_good?(letter)
       add_letter_to(@good_letters, letter)
 
-      @status = 1 if solved?
+      @status = :won if solved?
     else
       add_letter_to(@bad_letters, letter)
 
       @errors += 1
-      @status = -1 if lost?
+
+      @status = :lost if lost?
     end
   end
 
