@@ -53,6 +53,18 @@ class Game
     end
   end
 
+  def solved?
+    return (@letters - @good_letters).empty?
+  end
+
+  def lost?
+    return @errors >= 7
+  end
+
+  def repeated?(letter)
+    return @good_letters.include?(letter) || @bad_letters.include?(letter)
+  end
+
   def next_step(letter)
     letter = Unicode.upcase(letter)
 
@@ -60,14 +72,14 @@ class Game
       return
     end
 
-    if @good_letters.include?(letter) || @bad_letters.include?(letter)
+    if repeated?(letter)
       return
     end
 
     if is_good?(letter)
       add_letter_to(@good_letters, letter)
 
-      if (@letters - @good_letters).empty?
+      if solved?
         @status = 1
       end
     else
@@ -75,7 +87,7 @@ class Game
 
       @errors += 1
 
-      if @errors >= 7
+      if lost?
         @status = -1
       end
     end
