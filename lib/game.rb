@@ -27,15 +27,15 @@ class Game
       slovo = slovo.encode("UTF-8")
     end
 
-    return Unicode.upcase(slovo).split('')
+    Unicode.upcase(slovo).split('')
   end
 
   def status
-    return @status
+    @status
   end
 
   def is_good?(letter)
-    return @letters.include?(letter) ||
+    @letters.include?(letter) ||
       (letter == "Е" && @letters.include?("Ё")) ||
       (letter == "Ё" && @letters.include?("Е")) ||
       (letter == "И" && @letters.include?("Й")) ||
@@ -54,15 +54,15 @@ class Game
   end
 
   def solved?
-    return (@letters - @good_letters).empty?
+    (@letters - @good_letters).empty?
   end
 
   def lost?
-    return @errors >= 7
+    @errors >= 7
   end
 
   def repeated?(letter)
-    return @good_letters.include?(letter) || @bad_letters.include?(letter)
+    @good_letters.include?(letter) || @bad_letters.include?(letter)
   end
 
   def next_step(letter)
