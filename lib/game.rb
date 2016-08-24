@@ -9,17 +9,17 @@
 require 'unicode'
 
 class Game
+  attr_reader :errors, :status, :letters, :good_letters, :bad_letters
+
   MAX_ERRORS = 7
 
   def initialize(slovo)
     @letters = get_letters(slovo)
 
+    @status = :in_progress
     @errors = 0
-
     @good_letters = []
     @bad_letters = []
-
-    @status = :in_progress
   end
 
   def get_letters(slovo)
@@ -30,10 +30,6 @@ class Game
     end
 
     Unicode.upcase(slovo).split('')
-  end
-
-  def status
-    @status
   end
 
   def max_errors
@@ -68,7 +64,7 @@ class Game
   end
 
   def lost?
-    @status == -1 || @errors >= MAX_ERRORS
+    @status == :lost || @errors >= MAX_ERRORS
   end
 
   def in_progress?
@@ -111,21 +107,5 @@ class Game
     end
 
     next_step(letter)
-  end
-
-  def errors
-    @errors
-  end
-
-  def letters
-    @letters
-  end
-
-  def good_letters
-    @good_letters
-  end
-
-  def bad_letters
-    @bad_letters
   end
 end
