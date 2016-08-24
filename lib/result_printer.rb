@@ -30,6 +30,8 @@ class ResultPrinter
 
   def print_status(game)
     cls
+    puts "\nВиселица, версия #{game.version}"
+
     puts "\nСлово: #{get_word_for_print(game.letters, game.good_letters)}"
 
     puts "\nОшибки: #{game.bad_letters.join(", ")}"

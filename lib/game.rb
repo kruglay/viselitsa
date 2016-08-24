@@ -10,6 +10,7 @@ require 'unicode'
 
 class Game
   attr_reader :errors, :status, :letters, :good_letters, :bad_letters
+  attr_accessor :version
 
   MAX_ERRORS = 7
 
