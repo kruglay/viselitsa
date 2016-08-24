@@ -68,28 +68,18 @@ class Game
   def next_step(letter)
     letter = Unicode.upcase(letter)
 
-    if @status == -1 || @status == 1
-      return
-    end
-
-    if repeated?(letter)
-      return
-    end
+    return if @status == -1 || @status == 1
+    return if repeated?(letter)
 
     if is_good?(letter)
       add_letter_to(@good_letters, letter)
 
-      if solved?
-        @status = 1
-      end
+      @status = 1 if solved?
     else
       add_letter_to(@bad_letters, letter)
 
       @errors += 1
-
-      if lost?
-        @status = -1
-      end
+      @status = -1 if lost?
     end
   end
 
