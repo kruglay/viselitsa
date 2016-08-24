@@ -9,6 +9,8 @@
 require 'unicode'
 
 class Game
+  MAX_ERRORS = 7
+
   def initialize(slovo)
     @letters = get_letters(slovo)
 
@@ -58,7 +60,7 @@ class Game
   end
 
   def lost?
-    @errors >= 7
+    @errors >= MAX_ERRORS
   end
 
   def repeated?(letter)
