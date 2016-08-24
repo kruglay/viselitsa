@@ -36,6 +36,14 @@ class Game
     @status
   end
 
+  def max_errors
+    MAX_ERRORS
+  end
+
+  def errors_left
+    MAX_ERRORS - @errors
+  end
+
   def is_good?(letter)
     @letters.include?(letter) ||
       (letter == "Е" && @letters.include?("Ё")) ||
@@ -60,11 +68,15 @@ class Game
   end
 
   def lost?
-    @errors >= MAX_ERRORS
+    @status == -1 || @errors >= MAX_ERRORS
   end
 
   def in_progress?
     @status == :in_progress
+  end
+
+  def won?
+    @status == :won
   end
 
   def repeated?(letter)
