@@ -34,39 +34,41 @@ class Game
     return @status
   end
 
-  def next_step(bukva)
-    bukva = Unicode.upcase(bukva)
+  def is_good?(letter)
+    @letters.include?(letter) ||
+      (letter == "Е" && @letters.include?("Ё")) ||
+      (letter == "Ё" && @letters.include?("Е")) ||
+      (letter == "И" && @letters.include?("Й")) ||
+      (letter == "Й" && @letters.include?("И"))
+  end
+
+  def next_step(letter)
+    letter = Unicode.upcase(letter)
 
     if @status == -1 || @status == 1
       return
     end
 
-    if @good_letters.include?(bukva) || @bad_letters.include?(bukva)
+    if @good_letters.include?(letter) || @bad_letters.include?(letter)
       return
     end
 
-    if (
-      @letters.include?(bukva) ||
-      (bukva == "Е" && @letters.include?("Ё")) ||
-      (bukva == "Ё" && @letters.include?("Е")) ||
-      (bukva == "И" && @letters.include?("Й")) ||
-      (bukva == "Й" && @letters.include?("И"))
-    )
-      @good_letters << bukva
+    if is_good?(letter)
+      @good_letters << letter
 
-      if bukva == "И"
+      if letter == "И"
         @good_letters << "Й"
       end
 
-      if bukva == "Й"
+      if letter == "Й"
         @good_letters << "И"
       end
 
-      if bukva == "Е"
+      if letter == "Е"
         @good_letters << "Ё"
       end
 
-      if bukva == "Ё"
+      if letter == "Ё"
         @good_letters << "Е"
       end
 
@@ -74,7 +76,7 @@ class Game
         @status = 1
       end
     else
-      @bad_letters << bukva
+      @bad_letters << letter
 
       @errors += 1
 

@@ -17,7 +17,8 @@ word_reader = WordReader.new
 
 words_file_name = current_path + "/data/words.txt"
 
-game = Game.new(word_reader.read_from_file(words_file_name))
+word = word_reader.read_from_file(words_file_name)
+game = Game.new(word)
 
 while game.status == 0 do
   printer.print_status(game)
