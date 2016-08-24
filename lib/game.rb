@@ -35,11 +35,22 @@ class Game
   end
 
   def is_good?(letter)
-    @letters.include?(letter) ||
+    return @letters.include?(letter) ||
       (letter == "Е" && @letters.include?("Ё")) ||
       (letter == "Ё" && @letters.include?("Е")) ||
       (letter == "И" && @letters.include?("Й")) ||
       (letter == "Й" && @letters.include?("И"))
+  end
+
+  def add_letter_to(letters, letter)
+    letters << letter
+
+    case letter
+    when 'И' then letters << 'Й'
+    when 'Й' then letters << 'И'
+    when 'Е' then letters << 'Ё'
+    when 'Ё' then letters << 'Е'
+    end
   end
 
   def next_step(letter)
@@ -54,29 +65,13 @@ class Game
     end
 
     if is_good?(letter)
-      @good_letters << letter
-
-      if letter == "И"
-        @good_letters << "Й"
-      end
-
-      if letter == "Й"
-        @good_letters << "И"
-      end
-
-      if letter == "Е"
-        @good_letters << "Ё"
-      end
-
-      if letter == "Ё"
-        @good_letters << "Е"
-      end
+      add_letter_to(@good_letters, letter)
 
       if (@letters - @good_letters).empty?
         @status = 1
       end
     else
-      @bad_letters << letter
+      add_letter_to(@bad_letters, letter)
 
       @errors += 1
 
