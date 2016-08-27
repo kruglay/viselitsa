@@ -9,7 +9,8 @@
 require 'unicode'
 
 class Game
-  attr_reader :errors, :status, :letters, :good_letters, :bad_letters
+  attr_reader :errors, :letters, :good_letters, :bad_letters, :status
+
   attr_accessor :version
 
   MAX_ERRORS = 7
@@ -17,10 +18,12 @@ class Game
   def initialize(slovo)
     @letters = get_letters(slovo)
 
-    @status = :in_progress
     @errors = 0
+
     @good_letters = []
     @bad_letters = []
+
+    @status = :in_progress # :won, :lost
   end
 
   def get_letters(slovo)
@@ -64,6 +67,10 @@ class Game
     (@letters - @good_letters).empty?
   end
 
+  def repeated?(letter)
+    @good_letters.include?(letter) || @bad_letters.include?(letter)
+  end
+
   def lost?
     @status == :lost || @errors >= MAX_ERRORS
   end
@@ -76,14 +83,10 @@ class Game
     @status == :won
   end
 
-  def repeated?(letter)
-    @good_letters.include?(letter) || @bad_letters.include?(letter)
-  end
-
   def next_step(letter)
     letter = Unicode.upcase(letter)
 
-    return if @status == :won || @status == :lost
+    return if @status == :lost || @status == :won
     return if repeated?(letter)
 
     if is_good?(letter)
