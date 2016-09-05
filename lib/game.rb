@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 # Подключаем библиотеку для обработки (в т.ч.) русских строк
-require 'unicode'
+require 'unicode_utils/upcase'
 
 # Основной класс игры. Хранит состояние игры и предоставляет функции
 # для развития игры (ввод новых букв, подсчет кол-ва ошибок и т. п.)
@@ -35,7 +35,7 @@ class Game
       slovo = slovo.encode("UTF-8")
     end
 
-    Unicode.upcase(slovo).split('')
+    UnicodeUtils.upcase(slovo).split('')
   end
 
   # Метод, который просто возвращает константу MAX_ERRORS
@@ -100,7 +100,7 @@ class Game
   # Старый метод, который продвигает состояние игры на следующий ход
   def next_step(letter)
     # Поднимаем букву в верхний регистр
-    letter = Unicode.upcase(letter)
+    letter = UnicodeUtils.upcase(letter)
 
     # Вываливаемся, если игра уже закончена
     return if @status == :lost || @status == :won
