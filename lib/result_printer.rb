@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 # Класс, печатающий состояние и результаты игры
-
 class ResultPrinter
   def initialize(game)
     @status_image = []

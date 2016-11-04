@@ -3,18 +3,16 @@
 # Популярная детская игра, Виселица
 # https://ru.wikipedia.org/wiki/Виселица_(игра)
 
-current_path = "./" + File.dirname(__FILE__)
-
-require current_path + "/lib/game.rb"
-require current_path + "/lib/result_printer.rb"
-require current_path + "/lib/word_reader.rb"
+require_relative 'lib/game.rb'
+require_relative 'lib/result_printer.rb'
+require_relative 'lib/word_reader.rb'
 
 # Записываем версию игры в константу VERSION
-VERSION = "Игра виселица, версия 4. (c) Хороший программист\n"
+VERSION = 'Игра виселица, версия 4. (c) Хороший программист\n'
 
 # Создаем экземпляр класса WordReader
 word_reader = WordReader.new
-words_file_name = current_path + "/data/words.txt"
+words_file_name = "#{File.dirname(__FILE__)}/data/words.txt"
 word = word_reader.read_from_file(words_file_name)
 
 # Создаем игру и прописываем ее версию с помощью сеттера version=
