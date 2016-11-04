@@ -8,7 +8,7 @@ class WordReader
   end
 
   def read_from_file(file_name)
-    return nil unless File.exist?(file_name)
+    return unless File.exist?(file_name)
     File.readlines(file_name).sample.chomp
   end
 end
