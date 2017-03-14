@@ -1,22 +1,27 @@
-##Game Hungman
-Training app.
+##Игра Hungman
 
-In game Hungman you guess different words.
+Учебная программа.
 
-More descrtiption on 
+Игра отгадывания слов "Hungman".
+
+Подробное описание смотрите по ссылке: 
 https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D1%81%D0%B5%D0%BB%D0%B8%D1%86%D0%B0_(%D0%B8%D0%B3%D1%80%D0%B0) 
 
-####Install
-Clone this app to your local computer
+####Установка
 
-####Run 
-Put `ruby viselitsa.rb` in your console 
+Скопировать программу на компьютер
 
-####Rules
-you have 7 tryes to guess the word
+####Запуск
 
-####Options
-you can add new words, using file "words.txt" in folder "data" 
+Набрать `ruby viselitsa.rb` в строке консоли
+
+####Правила
+
+У вас есть семь попыток, чтобы отгадать слово
+
+####Настройки
+
+Добавлять, удалять слова можно в файле "data\words.txt"
 
 
-Written on Ruby by Vladimir Semenov.
+Написано на Ruby by Vladimir Semenov.
